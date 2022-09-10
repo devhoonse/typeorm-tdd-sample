@@ -1,0 +1,24 @@
+version: 'Compose specification'
+
+services:
+
+  rdb:
+    container_name: typeorm-tdd-rdb
+    image: mysql:8.0.30
+#    restart: always
+    environment:
+      - MYSQL_USER=svc_typeorm-tdd
+      - MYSQL_PASSWORD=password
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_DATABASE=db_typeorm-tdd
+      - TZ=Asia/Seoul
+    ports:
+      - '3308:3306' # host:container
+    #    volumes:
+    #      - './rdb:/var/lib/mysql'
+    command: [
+      'mysqld',
+      '--character-set-server=utf8mb4',
+      '--collation-server=utf8mb4_unicode_ci',
+      '--default-authentication-plugin=mysql_native_password'
+    ]
